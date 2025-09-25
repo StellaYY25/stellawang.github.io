@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter Movie Series - Your Gateway to the Wizarding World</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2d1b69 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="star" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ffd700" stop-opacity="0.8"/><stop offset="100%" stop-color="%23ffd700" stop-opacity="0"/></radialGradient></defs><circle cx="20" cy="20" r="1" fill="url(%23star)"><animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="30" r="0.5" fill="url(%23star)"><animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/></circle><circle cx="60" cy="70" r="0.8" fill="url(%23star)"><animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite"/></circle></svg>') repeat;
+            animation: twinkle 8s linear infinite;
+            opacity: 0.3;
+        }
+        
+        /* Magical CSS Elements */
+        .magical-symbol {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            display: inline-block;
+            margin: 0 1rem;
+        }
+        
+        .wand {
+            background: linear-gradient(45deg, #8B4513 0%, #D2B48C 50%, #8B4513 100%);
+            width: 4px;
+            height: 40px;
+            position: relative;
+            transform: rotate(45deg);
+            border-radius: 2px;
+        }
+        
+        .wand::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -2px;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #ffd700, #ffed4e);
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ffd700;
+        }
+        
+        .house-crest {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            margin: 1rem auto;
+        }
+        
+        .gryffindor-crest {
+            background: linear-gradient(135deg, #740001, #D3A625);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            position: relative;
+        }
+        
+        .gryffindor-crest::before {
+            content: '🦁';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .slytherin-crest {
+            background: linear-gradient(135deg, #1A472A, #5D5D5D);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            position: relative;
+        }
+        
+        .slytherin-crest::before {
+            content: '🐍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .magical-border {
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #ffd700, transparent, #ffd700) border-box;
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+        }
+        
+        .lightning-bolt {
+            width: 40px;
+            height: 60px;
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        .lightning-bolt::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 25px solid #ffd700;
+            top: 0;
+            left: 5px;
+        }
+        
+        .lightning-bolt::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid #ffd700;
+            bottom: 0;
+            left: 15px;
+        }
+        
+        .magical-orb {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #ffffff, #ffd700, #cc9900);
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .spell-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .spell-effect::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #ffd700;
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            animation: sparkle 2s infinite;
+            box-shadow: 0 0 6px #ffd700;
+        }
+        
+        .spell-effect::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffed4e;
+            border-radius: 50%;
+            top: 60%;
+            right: 15%;
+            animation: sparkle 3s infinite 0.5s;
+            box-shadow: 0 0 4px #ffed4e;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        .hogwarts-castle {
+            width: 100px;
+            height: 80px;
+            position: relative;
+            margin: 1rem auto;
+        }
+        
+        .castle-base {
+            width: 80px;
+            height: 40px;
+            background: linear-gradient(135deg, #2C3E50, #34495E);
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .castle-tower {
+            width: 20px;
+            height: 50px;
+            background: linear-gradient(135deg, #2C3E50, #34495E);
+            position: absolute;
+            bottom: 0;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .castle-tower:nth-of-type(1) { left: 0; }
+        .castle-tower:nth-of-type(2) { left: 25px; height: 60px; }
+        .castle-tower:nth-of-type(3) { right: 25px; height: 45px; }
+        .castle-tower:nth-of-type(4) { right: 0; height: 55px; }
+        
+        /* Additional Magical Effects */
+        .section-title::before {
+            content: '✨';
+            position: absolute;
+            left: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: sparkle 2s infinite;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            margin: 1rem auto;
+            position: relative;
+        }
+        
+        .movie-card::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #ffd700, transparent);
+            border-radius: 50%;
+            animation: pulse 3s infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+        
+        .plot-summary::before {
+            content: '📜';
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            font-size: 1.5rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 50%;
+            padding: 5px;
+        }
+        
+        .highlights::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+        
+        .viewing-guide::before {
+            content: '🏰';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.2), transparent);
+            border-radius: 50%;
+            padding: 10px;
+        }
+        
+        /* Floating magical particles */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.5" fill="%23ffd700" opacity="0.6"><animate attributeName="cy" values="100;-10" dur="15s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="15s" repeatCount="indefinite"/></circle><circle cx="30" cy="50" r="0.8" fill="%23ffed4e" opacity="0.4"><animate attributeName="cy" values="100;-10" dur="12s" repeatCount="indefinite" begin="2s"/><animate attributeName="opacity" values="0;1;0" dur="12s" repeatCount="indefinite" begin="2s"/></circle><circle cx="70" cy="80" r="0.6" fill="%23ffd700" opacity="0.5"><animate attributeName="cy" values="100;-10" dur="18s" repeatCount="indefinite" begin="5s"/><animate attributeName="opacity" values="0;1;0" dur="18s" repeatCount="indefinite" begin="5s"/></circle></svg>') repeat-x;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes twinkle {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+        
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ffd700;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            margin: 1rem auto;
+        }
+        
+        /* Overview Section */
+        .overview {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .overview-text {
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #e0e0e0;
+        }
+        
+        /* Movie Grid */
+        .movies-grid {
+            display: grid;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .movie-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .movie-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .movie-card:hover::before {
+            left: 100%;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .movie-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 1.5rem;
+        }
+        
+        .movie-number {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .movie-info h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .movie-details {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+        
+        .plot-summary {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #ffd700;
+            position: relative;
+        }
+        
+        .plot-summary h4 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            position: relative;
+        }
+        
+        .highlight-item {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .highlight-item h5 {
+            color: #ffd700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .highlight-item p {
+            font-size: 0.85rem;
+            color: #d0d0d0;
+        }
+        
+        /* Viewing Guide */
+        .viewing-guide {
+            background: linear-gradient(135deg, #1a1a3a, #2d1b69);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .movie-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .highlights {
+                grid-template-columns: 1fr;
+            }
+            
+            .overview, .viewing-guide, .movie-card {
+                padding: 2rem;
+            }
+        }
+        
+        /* Footer */
+        footer {
+            background: #000428;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .footer-text {
+            color: #888;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
+                <div class="magical-symbol">
+                    <div class="wand"></div>
+                </div>
+                <div class="lightning-bolt"></div>
+                <div class="magical-symbol">
+                    <div class="wand"></div>
+                </div>
+            </div>
+            <h1 class="logo">Harry Potter Movie Series</h1>
+            <p class="tagline">Your Gateway to the Wizarding World</p>
+            <div class="magical-orb" style="margin-top: 1.5rem;"></div>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <div class="container">
+                <div class="overview">
+                    <div class="hogwarts-castle">
+                        <div class="castle-base"></div>
+                        <div class="castle-tower"></div>
+                        <div class="castle-tower"></div>
+                        <div class="castle-tower"></div>
+                        <div class="castle-tower"></div>
+                    </div>
+                    <p class="overview-text">
+                        Step into a world where magic is real, friendships are tested, and the battle between good and evil 
+                        unfolds across eight epic films. The Harry Potter movie series brings J.K. Rowling's beloved books to life, 
+                        following the journey of a young wizard who discovers his destiny and the power of love, courage, and sacrifice. 
+                        Whether you're new to the wizarding world or revisiting the magic, this guide will take you through each film's 
+                        unforgettable story.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem;">
+                        <div class="house-crest gryffindor-crest"></div>
+                        <div class="house-crest slytherin-crest"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="movies">
+            <div class="container">
+                <h2 class="section-title">The Complete Movie Journey</h2>
+                <div class="movies-grid">
+                    <!-- Movie 1 -->
+                    <div class="movie-card">
+                        <div class="spell-effect"></div>
+                        <div class="movie-header">
+                            <div class="movie-number">1</div>
+                            <div class="movie-info">
+                                <h3>Harry Potter and the Philosopher's Stone</h3>
+                                <div class="movie-details">2001 • Directed by Chris Columbus • 152 minutes</div>
+                            </div>
+                            <div style="margin-left: auto;">
+                                <div class="magical-orb" style="width: 30px; height: 30px;"></div>
+                            </div>
+                        </div>
+                        <div class="plot-summary">
+                            <h4>The Magic Begins</h4>
+                            <p>On his 11th birthday, Harry Potter discovers he's not just an ordinary boy – he's a wizard! Rescued from his cruel relatives by the gentle giant Hagrid, Harry learns he's famous in the wizarding world for surviving an attack by the dark wizard Voldemort as a baby. At Hogwarts School of Witchcraft and Wizardry, Harry finds the family he never had in best friends Ron and Hermione. Together, they uncover a mystery involving the powerful Philosopher's Stone, which grants immortality. But when someone tries to steal it, Harry must face the truth about his past and confront the dark forces that killed his parents.</p>
+                        </div>
+                        <div class="highlights">
+                            <div class="highlight-item">
+                                <h5>Key Characters</h5>
+                                <p>Harry Potter, Ron Weasley, Hermione Granger, Dumbledore, Hagrid</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Magical Elements</h5>
+                                <p>Hogwarts Castle, Quidditch, Sorting Hat, Three-headed dog Fluffy</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Themes</h5>
+                                <p>Finding your place in the world, the power of friendship, good vs. evil</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie 2 -->
+                    <div class="movie-card">
+                        <div class="spell-effect"></div>
+                        <div class="movie-header">
+                            <div class="movie-number">2</div>
+                            <div class="movie-info">
+                                <h3>Harry Potter and the Chamber of Secrets</h3>
+                                <div class="movie-details">2002 • Directed by Chris Columbus • 161 minutes</div>
+                            </div>
+                            <div style="margin-left: auto; font-size: 2rem; animation: float 2s ease-in-out infinite;">🐍</div>
+                        </div>
+                        <div class="plot-summary">
+                            <h4>The Mystery Deepens</h4>
+                            <p>Harry's second year at Hogwarts begins with ominous warnings from a house-elf named Dobby, begging him not to return to school. When Harry ignores the warning, a series of terrifying attacks begin petrifying students. Messages written in blood declare that "the Chamber of Secrets has been opened" and that the "heir of Slytherin" has returned. As fear grips the school, Harry discovers he can speak to snakes – a rare and dark ability. When Hermione becomes the latest victim and Ron's sister Ginny disappears into the Chamber itself, Harry must venture into the depths of Hogwarts to face a deadly monster and uncover the truth about the Chamber's dark history.</p>
+                        </div>
+                        <div class="highlights">
+                            <div class="highlight-item">
+                                <h5>Key Characters</h5>
+                                <p>Dobby, Gilderoy Lockhart, Ginny Weasley, Tom Riddle</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Magical Elements</h5>
+                                <p>Chamber of Secrets, Basilisk, Fawkes the Phoenix, Tom Riddle's Diary</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Themes</h5>
+                                <p>Identity and heritage, prejudice, the power of memory</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie 3 -->
+                    <div class="movie-card">
+                        <div class="spell-effect"></div>
+                        <div class="movie-header">
+                            <div class="movie-number">3</div>
+                            <div class="movie-info">
+                                <h3>Harry Potter and the Prisoner of Azkaban</h3>
+                                <div class="movie-details">2004 • Directed by Alfonso Cuarón • 142 minutes</div>
+                            </div>
+                            <div style="margin-left: auto; font-size: 2rem; animation: float 3s ease-in-out infinite;">🌙</div>
+                        </div>
+                        <div class="plot-summary">
+                            <h4>Secrets of the Past</h4>
+                            <p>The wizarding world is in panic as the dangerous prisoner Sirius Black escapes from the inescapable Azkaban prison. Believed to be a devoted follower of Voldemort who betrayed Harry's parents, Black is thought to be hunting Harry. As soul-sucking Dementors patrol Hogwarts, Harry learns to defend himself with the Patronus charm from the new Defense Against Dark Arts teacher, Professor Lupin. But everything Harry believes about his past is turned upside down when he discovers the truth about Sirius Black, his connection to Harry's father, and the real betrayer who caused his parents' death. In a night of revelations and time travel, Harry learns that things are not always what they seem.</p>
+                        </div>
+                        <div class="highlights">
+                            <div class="highlight-item">
+                                <h5>Key Characters</h5>
+                                <p>Sirius Black, Professor Lupin, Professor Snape, Peter Pettigrew</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Magical Elements</h5>
+                                <p>Dementors, Patronus charm, Time-Turner, Marauder's Map</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Themes</h5>
+                                <p>Truth vs. perception, the complexity of the past, growing up</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie 4 -->
+                    <div class="movie-card">
+                        <div class="spell-effect"></div>
+                        <div class="movie-header">
+                            <div class="movie-number">4</div>
+                            <div class="movie-info">
+                                <h3>Harry Potter and the Goblet of Fire</h3>
+                                <div class="movie-details">2005 • Directed by Mike Newell • 157 minutes</div>
+                            </div>
+                            <div style="margin-left: auto; font-size: 2rem; animation: float 2.5s ease-in-out infinite;">🔥</div>
+                        </div>
+                        <div class="plot-summary">
+                            <h4>The Dark Lord Returns</h4>
+                            <p>Hogwarts hosts the dangerous Triwizard Tournament, where champions from three wizarding schools compete in deadly tasks. Despite being underage, Harry's name mysteriously emerges from the Goblet of Fire, forcing him to compete. As Harry faces dragons, underwater rescues, and a deadly maze, he struggles with adolescence, his first crush on Cho Chang, and Ron's jealousy. The tournament culminates in tragedy when Harry and fellow Hogwarts champion Cedric Diggory are transported to a graveyard where Voldemort awaits. Using Harry's blood in a dark ritual, Voldemort returns to physical form. Cedric is murdered, and Harry barely escapes to bring word that the wizarding world's greatest fear has come true – Voldemort is back.</p>
+                        </div>
+                        <div class="highlights">
+                            <div class="highlight-item">
+                                <h5>Key Characters</h5>
+                                <p>Cedric Diggory, Mad-Eye Moody, Rita Skeeter, Cho Chang</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Magical Elements</h5>
+                                <p>Triwizard Tournament, Hungarian Horntail dragon, Veritaserum, Portkey</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Themes</h5>
+                                <p>Coming of age, loss of innocence, the return of evil</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie 5 -->
+                    <div class="movie-card">
+                        <div class="movie-header">
+                            <div class="movie-number">5</div>
+                            <div class="movie-info">
+                                <h3>Harry Potter and the Order of the Phoenix</h3>
+                                <div class="movie-details">2007 • Directed by David Yates • 138 minutes</div>
+                            </div>
+                        </div>
+                        <div class="plot-summary">
+                            <h4>The Ministry Denies the Truth</h4>
+                            <p>The Ministry of Magic refuses to believe Voldemort has returned, launching a campaign to discredit Harry and Dumbledore. The cruel Dolores Umbridge takes over Hogwarts as High Inquisitor, banning practical defense magic and torturing students with her "discipline." Feeling abandoned and angry, Harry struggles with disturbing visions of Voldemort's actions through their connected minds. With Dumbledore distant and the adults failing them, Harry forms "Dumbledore's Army," secretly teaching students real defense spells. Meanwhile, the Order of the Phoenix – a secret organization fighting Voldemort – battles Death Eaters in the shadows. The film culminates in a fierce battle at the Ministry, where Harry learns a devastating prophecy about his destiny and suffers a heartbreaking loss when his godfather Sirius Black is killed.</p>
+                        </div>
+                        <div class="highlights">
+                            <div class="highlight-item">
+                                <h5>Key Characters</h5>
+                                <p>Dolores Umbridge, Luna Lovegood, Bellatrix Lestrange, Order members</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Magical Elements</h5>
+                                <p>Thestrals, Patronus messages, Department of Mysteries, Prophecy Orbs</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Themes</h5>
+                                <p>Rebellion against tyranny, the power of teaching, loss and grief</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie 6 -->
+                    <div class="movie-card">
+                        <div class="movie-header">
+                            <div class="movie-number">6</div>
+                            <div class="movie-info">
+                                <h3>Harry Potter and the Half-Blood Prince</h3>
+                                <div class="movie-details">2009 • Directed by David Yates • 153 minutes</div>
+                            </div>
+                        </div>
+                        <div class="plot-summary">
+                            <h4>Uncovering Voldemort's Secrets</h4>
+                            <p>As Voldemort's power grows stronger, Dumbledore begins private lessons with Harry, exploring memories of Tom Riddle's past to understand how he became the Dark Lord. They discover that Voldemort split his soul into seven pieces, hiding them in objects called Horcruxes to achieve immortality. Meanwhile, Harry excels in Potions class using notes from the mysterious "Half-Blood Prince," while romance blooms throughout Hogwarts – Harry finds himself attracted to Ron's sister Ginny, and Ron dates Lavender Brown, making Hermione jealous. As Death Eaters infiltrate Hogwarts, Draco Malfoy struggles with a dark mission from Voldemort. The film ends in tragedy when Dumbledore, weakened from destroying a Horcrux, is killed by Snape on the Astronomy Tower, leaving Harry more alone than ever and Hogwarts without its greatest protector.</p>
+                        </div>
+                        <div class="highlights">
+                            <div class="highlight-item">
+                                <h5>Key Characters</h5>
+                                <p>Professor Slughorn, young Tom Riddle, Lavender Brown, the Half-Blood Prince</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Magical Elements</h5>
+                                <p>Horcruxes, Pensieve memories, Felix Felicis (Liquid Luck), Inferi</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Themes</h5>
+                                <p>The nature of evil, sacrifice, coming of age, love and loss</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie 7 -->
+                    <div class="movie-card">
+                        <div class="movie-header">
+                            <div class="movie-number">7</div>
+                            <div class="movie-info">
+                                <h3>Harry Potter and the Deathly Hallows – Part 1</h3>
+                                <div class="movie-details">2010 • Directed by David Yates • 146 minutes</div>
+                            </div>
+                        </div>
+                        <div class="plot-summary">
+                            <h4>The Hunt for Horcruxes</h4>
+                            <p>With Dumbledore gone and Voldemort controlling the Ministry, Harry, Ron, and Hermione abandon their final year at Hogwarts to hunt for the remaining Horcruxes. Living as fugitives in the wilderness, they struggle with the mental and emotional toll of their mission. They learn about the Deathly Hallows – three powerful magical objects that could make someone master of death – but Harry becomes obsessed with finding them instead of focusing on Horcruxes. The locket Horcrux they carry affects their minds, causing Ron to abandon his friends in jealousy and despair. When Harry and Hermione visit his parents' graves in Godric's Hollow, they're nearly captured by Voldemort. After Ron returns and destroys the locket, they're captured and taken to Malfoy Manor, where Hermione is tortured by Bellatrix Lestrange. They escape with help from Dobby, but the brave house-elf dies protecting them, a heartbreaking loss that strengthens their resolve.</p>
+                        </div>
+                        <div class="highlights">
+                            <div class="highlight-item">
+                                <h5>Key Characters</h5>
+                                <p>Rufus Scrimgeour, Xenophilius Lovegood, Griphook, Dobby</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Magical Elements</h5>
+                                <p>Horcrux locket, Deathly Hallows symbol, Polyjuice Potion, Snatchers</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Themes</h5>
+                                <p>Sacrifice and loyalty, the burden of destiny, loss of innocence</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movie 8 -->
+                    <div class="movie-card">
+                        <div class="movie-header">
+                            <div class="movie-number">8</div>
+                            <div class="movie-info">
+                                <h3>Harry Potter and the Deathly Hallows – Part 2</h3>
+                                <div class="movie-details">2011 • Directed by David Yates • 130 minutes</div>
+                            </div>
+                        </div>
+                        <div class="plot-summary">
+                            <h4>The Final Battle</h4>
+                            <p>The epic conclusion begins as Harry, Ron, and Hermione break into Gringotts Bank to steal a Horcrux from Bellatrix's vault, escaping on a dragon. They return to Hogwarts, now under Death Eater control, to find the remaining Horcruxes. As Voldemort's forces surround the castle, the Order of the Phoenix and Hogwarts defenders prepare for the Battle of Hogwarts. In heartbreaking moments, beloved characters fall including Fred Weasley, Lupin, and Tonks. Harry discovers that he himself is a Horcrux – part of Voldemort's soul lives within him, and he must die for Voldemort to be defeated. In the film's most powerful scene, Harry walks into the Forbidden Forest to sacrifice himself. But love proves stronger than death, and Harry survives while the Horcrux within him is destroyed. In the final confrontation, Harry and Voldemort duel while the battle rages around them, ending when Voldemort's killing curse rebounds and destroys him forever. The series concludes 19 years later, showing our heroes as adults sending their own children to Hogwarts.</p>
+                        </div>
+                        <div class="highlights">
+                            <div class="highlight-item">
+                                <h5>Key Characters</h5>
+                                <p>Professor McGonagall, Neville Longbottom, Mrs. Weasley, Nagini</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Magical Elements</h5>
+                                <p>Gringotts dragon, Room of Requirement, Fiendfyre, Elder Wand</p>
+                            </div>
+                            <div class="highlight-item">
+                                <h5>Themes</h5>
+                                <p>Ultimate sacrifice, the power of love, good triumphing over evil</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide">
+            <div class="container">
+                <div class="viewing-guide">
+                    <h2 class="section-title">Ready to Begin Your Journey?</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                        The Harry Potter films are best experienced in order, as each movie builds upon the previous ones. 
+                        The story grows darker and more complex as the characters mature, making it perfect for viewers of all ages.
+                    </p>
+                    <p style="font-size: 1rem; color: #d0d0d0;">
+                        <strong>Total Runtime:</strong> Approximately 20 hours<br>
+                        <strong>Recommended Age:</strong> 8+ (later films are more intense)<br>
+                        <strong>Available on:</strong> Most major streaming platforms and digital rental services
+                    </p>
+                    <button class="cta-button" onclick="alert('Start with Harry Potter and the Philosopher\'s Stone and let the magic begin!')">
+                        Start Your Magical Journey
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">
+                Experience the magic that captivated millions worldwide. The wizarding world awaits you.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Add some interactive magic
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll for any internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Add scroll animation for movie cards
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Initially hide movie cards and animate them in
+            document.querySelectorAll('.movie-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
