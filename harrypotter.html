@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harry Potter Movie Series - Your Gateway to the Wizarding World</title>
+    <title>Harry Potter Movie Series - Interactive Guide</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
         
@@ -27,10 +27,101 @@
             padding: 0 20px;
         }
         
+        /* Interactive Navigation */
+        .interactive-nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #000;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a3a, #2d1b69);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .close:hover {
+            color: #ffd700;
+        }
+        
         /* Header */
         header {
             background: linear-gradient(135deg, #000428 0%, #004e92 100%);
-            padding: 2rem 0;
+            padding: 4rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -48,289 +139,12 @@
             opacity: 0.3;
         }
         
-        /* Magical CSS Elements */
-        .magical-symbol {
-            width: 60px;
-            height: 60px;
-            position: relative;
-            display: inline-block;
-            margin: 0 1rem;
-        }
-        
-        .wand {
-            background: linear-gradient(45deg, #8B4513 0%, #D2B48C 50%, #8B4513 100%);
-            width: 4px;
-            height: 40px;
-            position: relative;
-            transform: rotate(45deg);
-            border-radius: 2px;
-        }
-        
-        .wand::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -2px;
-            width: 8px;
-            height: 8px;
-            background: radial-gradient(circle, #ffd700, #ffed4e);
-            border-radius: 50%;
-            box-shadow: 0 0 10px #ffd700;
-        }
-        
-        .house-crest {
-            width: 80px;
-            height: 80px;
-            position: relative;
-            margin: 1rem auto;
-        }
-        
-        .gryffindor-crest {
-            background: linear-gradient(135deg, #740001, #D3A625);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            position: relative;
-        }
-        
-        .gryffindor-crest::before {
-            content: '🦁';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .slytherin-crest {
-            background: linear-gradient(135deg, #1A472A, #5D5D5D);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            position: relative;
-        }
-        
-        .slytherin-crest::before {
-            content: '🐍';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .magical-border {
-            border: 2px solid transparent;
-            background: linear-gradient(45deg, #ffd700, transparent, #ffd700) border-box;
-            background-clip: padding-box, border-box;
-            background-origin: padding-box, border-box;
-        }
-        
-        .lightning-bolt {
-            width: 40px;
-            height: 60px;
-            position: relative;
-            margin: 0 auto;
-        }
-        
-        .lightning-bolt::before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 25px solid #ffd700;
-            top: 0;
-            left: 5px;
-        }
-        
-        .lightning-bolt::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 25px solid #ffd700;
-            bottom: 0;
-            left: 15px;
-        }
-        
-        .magical-orb {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #ffffff, #ffd700, #cc9900);
-            position: relative;
-            animation: float 3s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .spell-effect {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        
-        .spell-effect::before {
-            content: '';
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #ffd700;
-            border-radius: 50%;
-            top: 20%;
-            left: 10%;
-            animation: sparkle 2s infinite;
-            box-shadow: 0 0 6px #ffd700;
-        }
-        
-        .spell-effect::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #ffed4e;
-            border-radius: 50%;
-            top: 60%;
-            right: 15%;
-            animation: sparkle 3s infinite 0.5s;
-            box-shadow: 0 0 4px #ffed4e;
-        }
-        
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
-        }
-        
-        .hogwarts-castle {
-            width: 100px;
-            height: 80px;
-            position: relative;
-            margin: 1rem auto;
-        }
-        
-        .castle-base {
-            width: 80px;
-            height: 40px;
-            background: linear-gradient(135deg, #2C3E50, #34495E);
-            position: absolute;
-            bottom: 0;
-            left: 10px;
-            border-radius: 5px 5px 0 0;
-        }
-        
-        .castle-tower {
-            width: 20px;
-            height: 50px;
-            background: linear-gradient(135deg, #2C3E50, #34495E);
-            position: absolute;
-            bottom: 0;
-            border-radius: 10px 10px 0 0;
-        }
-        
-        .castle-tower:nth-of-type(1) { left: 0; }
-        .castle-tower:nth-of-type(2) { left: 25px; height: 60px; }
-        .castle-tower:nth-of-type(3) { right: 25px; height: 45px; }
-        .castle-tower:nth-of-type(4) { right: 0; height: 55px; }
-        
-        /* Additional Magical Effects */
-        .section-title::before {
-            content: '✨';
-            position: absolute;
-            left: -2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            animation: sparkle 2s infinite;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-            margin: 1rem auto;
-            position: relative;
-        }
-        
-        .movie-card::after {
-            content: '';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle, #ffd700, transparent);
-            border-radius: 50%;
-            animation: pulse 3s infinite;
-            opacity: 0.7;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(0.8); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 1; }
-        }
-        
-        .plot-summary::before {
-            content: '📜';
-            position: absolute;
-            left: -10px;
-            top: -10px;
-            font-size: 1.5rem;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 50%;
-            padding: 5px;
-        }
-        
-        .highlights::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-        }
-        
-        .viewing-guide::before {
-            content: '🏰';
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3rem;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.2), transparent);
-            border-radius: 50%;
-            padding: 10px;
-        }
-        
-        /* Floating magical particles */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.5" fill="%23ffd700" opacity="0.6"><animate attributeName="cy" values="100;-10" dur="15s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="15s" repeatCount="indefinite"/></circle><circle cx="30" cy="50" r="0.8" fill="%23ffed4e" opacity="0.4"><animate attributeName="cy" values="100;-10" dur="12s" repeatCount="indefinite" begin="2s"/><animate attributeName="opacity" values="0;1;0" dur="12s" repeatCount="indefinite" begin="2s"/></circle><circle cx="70" cy="80" r="0.6" fill="%23ffd700" opacity="0.5"><animate attributeName="cy" values="100;-10" dur="18s" repeatCount="indefinite" begin="5s"/><animate attributeName="opacity" values="0;1;0" dur="18s" repeatCount="indefinite" begin="5s"/></circle></svg>') repeat-x;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
         @keyframes twinkle {
             0% { transform: translateY(0); }
             100% { transform: translateY(-100px); }
         }
         
-        .logo {
+        .header-title {
             font-family: 'Cinzel', serif;
             font-size: 3.5rem;
             font-weight: 700;
@@ -350,6 +164,49 @@
             font-weight: 300;
             position: relative;
             z-index: 1;
+            margin-bottom: 2rem;
+        }
+        
+        /* Quote Generator */
+        .quote-section {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            max-width: 800px;
+        }
+        
+        .quote-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #ffd700;
+            margin-bottom: 1rem;
+            min-height: 3rem;
+        }
+        
+        .quote-author {
+            color: #e0e0e0;
+            font-size: 1rem;
+        }
+        
+        .quote-btn {
+            background: linear-gradient(135deg, #8B1538, #B71E3B);
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .quote-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 21, 56, 0.4);
         }
         
         /* Section Styling */
@@ -375,25 +232,7 @@
             margin: 1rem auto;
         }
         
-        /* Overview Section */
-        .overview {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 2rem 0;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        
-        .overview-text {
-            font-size: 1.1rem;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            color: #e0e0e0;
-        }
-        
-        /* Movie Grid */
+        /* Movie Cards */
         .movies-grid {
             display: grid;
             gap: 3rem;
@@ -411,21 +250,6 @@
             overflow: hidden;
         }
         
-        .movie-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-        
-        .movie-card:hover::before {
-            left: 100%;
-        }
-        
         .movie-card:hover {
             transform: translateY(-5px);
             border-color: rgba(255, 215, 0, 0.6);
@@ -435,8 +259,13 @@
         .movie-header {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 1.5rem;
-            gap: 1.5rem;
+            gap: 1rem;
+        }
+        
+        .movie-info {
+            flex: 1;
         }
         
         .movie-number {
@@ -453,7 +282,7 @@
             flex-shrink: 0;
         }
         
-        .movie-info h3 {
+        .movie-title {
             font-family: 'Cinzel', serif;
             font-size: 1.8rem;
             color: #ffd700;
@@ -465,13 +294,75 @@
             font-size: 0.9rem;
         }
         
+        /* Movie Controls */
+        .movie-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .watched-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .watched-checkbox input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stars {
+            display: flex;
+            gap: 0.2rem;
+        }
+        
+        .star {
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        
+        .star:hover,
+        .star.filled {
+            color: #ffd700;
+        }
+        
+        .spell-btn {
+            background: linear-gradient(135deg, #663399, #9966CC);
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .spell-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(153, 102, 204, 0.4);
+        }
+        
+        /* Plot Summary */
         .plot-summary {
             background: rgba(0, 0, 0, 0.2);
             border-radius: 15px;
             padding: 1.5rem;
             margin: 1.5rem 0;
             border-left: 4px solid #ffd700;
-            position: relative;
         }
         
         .plot-summary h4 {
@@ -480,12 +371,12 @@
             font-family: 'Cinzel', serif;
         }
         
+        /* Highlights */
         .highlights {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin-top: 1.5rem;
-            position: relative;
         }
         
         .highlight-item {
@@ -507,43 +398,98 @@
             color: #d0d0d0;
         }
         
-        /* Viewing Guide */
-        .viewing-guide {
-            background: linear-gradient(135deg, #1a1a3a, #2d1b69);
+        /* Progress Tracker */
+        .progress-section {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 3rem;
+            padding: 2rem;
             margin: 2rem 0;
             text-align: center;
-            position: relative;
         }
         
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            color: #000;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            height: 100%;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .progress-text {
+            color: #ffd700;
             font-weight: 600;
-            margin-top: 1.5rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
+            margin-top: 0.5rem;
         }
         
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        /* Spell Effects */
+        .spell-effect {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            font-size: 2rem;
+            animation: spell-animation 2s ease-out forwards;
+        }
+        
+        @keyframes spell-animation {
+            0% {
+                opacity: 1;
+                transform: scale(0.5) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.8) rotate(360deg) translateY(-100px);
+            }
+        }
+        
+        /* House Badge */
+        .house-badge {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 2px solid #ffd700;
+            text-align: center;
+            z-index: 50;
+            min-width: 120px;
+        }
+        
+        .house-badge.gryffindor { border-color: #740001; }
+        .house-badge.slytherin { border-color: #1a472a; }
+        .house-badge.hufflepuff { border-color: #ffed4a; }
+        .house-badge.ravenclaw { border-color: #0e1a40; }
+        
+        .house-name {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            margin-top: 0.5rem;
         }
         
         /* Responsive */
         @media (max-width: 768px) {
-            .logo {
+            .header-title {
                 font-size: 2.5rem;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
             }
             
             .movie-header {
@@ -551,69 +497,81 @@
                 text-align: center;
             }
             
-            .highlights {
-                grid-template-columns: 1fr;
+            .movie-controls {
+                justify-content: center;
             }
             
-            .overview, .viewing-guide, .movie-card {
-                padding: 2rem;
+            .house-badge {
+                position: relative;
+                right: auto;
+                top: auto;
+                margin: 1rem auto;
             }
-        }
-        
-        /* Footer */
-        footer {
-            background: #000428;
-            padding: 2rem 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        
-        .footer-text {
-            color: #888;
-            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Interactive Navigation -->
+    <nav class="interactive-nav">
         <div class="container">
-            <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
-                <div class="magical-symbol">
-                    <div class="wand"></div>
-                </div>
-                <div class="lightning-bolt"></div>
-                <div class="magical-symbol">
-                    <div class="wand"></div>
+            <div class="nav-container">
+                <div class="logo">Harry Potter Movie Guide</div>
+                <div class="nav-buttons">
+                    <button class="nav-btn" onclick="openSortingQuiz()">🏰 Get Sorted</button>
+                    <button class="nav-btn" onclick="openCharacterQuiz()">👤 Character Quiz</button>
+                    <button class="nav-btn" onclick="toggleProgress()">📊 My Progress</button>
+                    <button class="nav-btn" onclick="castRandomSpell(event)">✨ Cast Spell</button>
                 </div>
             </div>
-            <h1 class="logo">Harry Potter Movie Series</h1>
-            <p class="tagline">Your Gateway to the Wizarding World</p>
-            <div class="magical-orb" style="margin-top: 1.5rem;"></div>
+        </div>
+    </nav>
+
+    <!-- House Badge (hidden initially) -->
+    <div id="houseBadge" class="house-badge" style="display: none;">
+        <div id="houseEmoji">🏰</div>
+        <div id="houseName" class="house-name">Unknown</div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1 class="header-title">Harry Potter Movie Series</h1>
+            <p class="tagline">Your Interactive Gateway to the Wizarding World</p>
         </div>
     </header>
 
+    <!-- Quote Generator -->
+    <div class="container">
+        <div class="quote-section">
+            <div id="movieQuote" class="quote-text">"It is our choices that show what we truly are, far more than our abilities."</div>
+            <div id="quoteAuthor" class="quote-author">- Albus Dumbledore</div>
+            <button class="quote-btn" onclick="generateQuote()">✨ New Quote</button>
+        </div>
+    </div>
+
+    <!-- Progress Section (hidden initially) -->
+    <div id="progressSection" class="container" style="display: none;">
+        <div class="progress-section">
+            <h3>Your Movie Journey Progress</h3>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <div id="progressText" class="progress-text">0 of 8 movies watched (0%)</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
     <main>
         <section class="intro">
             <div class="container">
                 <div class="overview">
-                    <div class="hogwarts-castle">
-                        <div class="castle-base"></div>
-                        <div class="castle-tower"></div>
-                        <div class="castle-tower"></div>
-                        <div class="castle-tower"></div>
-                        <div class="castle-tower"></div>
-                    </div>
-                    <p class="overview-text">
+                    <p style="text-align: center; font-size: 1.1rem; max-width: 800px; margin: 0 auto; color: #e0e0e0;">
                         Step into a world where magic is real, friendships are tested, and the battle between good and evil 
                         unfolds across eight epic films. The Harry Potter movie series brings J.K. Rowling's beloved books to life, 
                         following the journey of a young wizard who discovers his destiny and the power of love, courage, and sacrifice. 
                         Whether you're new to the wizarding world or revisiting the magic, this guide will take you through each film's 
                         unforgettable story.
                     </p>
-                    <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem;">
-                        <div class="house-crest gryffindor-crest"></div>
-                        <div class="house-crest slytherin-crest"></div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -624,16 +582,29 @@
                 <div class="movies-grid">
                     <!-- Movie 1 -->
                     <div class="movie-card">
-                        <div class="spell-effect"></div>
                         <div class="movie-header">
                             <div class="movie-number">1</div>
                             <div class="movie-info">
-                                <h3>Harry Potter and the Philosopher's Stone</h3>
+                                <h3 class="movie-title">Harry Potter and the Philosopher's Stone</h3>
                                 <div class="movie-details">2001 • Directed by Chris Columbus • 152 minutes</div>
                             </div>
-                            <div style="margin-left: auto;">
-                                <div class="magical-orb" style="width: 30px; height: 30px;"></div>
+                        </div>
+                        <div class="movie-controls">
+                            <label class="watched-checkbox">
+                                <input type="checkbox" onchange="updateProgress()" data-movie="1">
+                                <span>Watched</span>
+                            </label>
+                            <div class="rating-section">
+                                <span>Rate:</span>
+                                <div class="stars" data-movie="1">
+                                    <span class="star" onclick="setRating(1, 1)">★</span>
+                                    <span class="star" onclick="setRating(1, 2)">★</span>
+                                    <span class="star" onclick="setRating(1, 3)">★</span>
+                                    <span class="star" onclick="setRating(1, 4)">★</span>
+                                    <span class="star" onclick="setRating(1, 5)">★</span>
+                                </div>
                             </div>
+                            <button class="spell-btn" onclick="castSpell(event, 'Lumos')">✨ Lumos</button>
                         </div>
                         <div class="plot-summary">
                             <h4>The Magic Begins</h4>
@@ -657,14 +628,29 @@
 
                     <!-- Movie 2 -->
                     <div class="movie-card">
-                        <div class="spell-effect"></div>
                         <div class="movie-header">
                             <div class="movie-number">2</div>
                             <div class="movie-info">
-                                <h3>Harry Potter and the Chamber of Secrets</h3>
+                                <h3 class="movie-title">Harry Potter and the Chamber of Secrets</h3>
                                 <div class="movie-details">2002 • Directed by Chris Columbus • 161 minutes</div>
                             </div>
-                            <div style="margin-left: auto; font-size: 2rem; animation: float 2s ease-in-out infinite;">🐍</div>
+                        </div>
+                        <div class="movie-controls">
+                            <label class="watched-checkbox">
+                                <input type="checkbox" onchange="updateProgress()" data-movie="2">
+                                <span>Watched</span>
+                            </label>
+                            <div class="rating-section">
+                                <span>Rate:</span>
+                                <div class="stars" data-movie="2">
+                                    <span class="star" onclick="setRating(2, 1)">★</span>
+                                    <span class="star" onclick="setRating(2, 2)">★</span>
+                                    <span class="star" onclick="setRating(2, 3)">★</span>
+                                    <span class="star" onclick="setRating(2, 4)">★</span>
+                                    <span class="star" onclick="setRating(2, 5)">★</span>
+                                </div>
+                            </div>
+                            <button class="spell-btn" onclick="castSpell(event, 'Expelliarmus')">⚡ Expelliarmus</button>
                         </div>
                         <div class="plot-summary">
                             <h4>The Mystery Deepens</h4>
@@ -688,14 +674,29 @@
 
                     <!-- Movie 3 -->
                     <div class="movie-card">
-                        <div class="spell-effect"></div>
                         <div class="movie-header">
                             <div class="movie-number">3</div>
                             <div class="movie-info">
-                                <h3>Harry Potter and the Prisoner of Azkaban</h3>
+                                <h3 class="movie-title">Harry Potter and the Prisoner of Azkaban</h3>
                                 <div class="movie-details">2004 • Directed by Alfonso Cuarón • 142 minutes</div>
                             </div>
-                            <div style="margin-left: auto; font-size: 2rem; animation: float 3s ease-in-out infinite;">🌙</div>
+                        </div>
+                        <div class="movie-controls">
+                            <label class="watched-checkbox">
+                                <input type="checkbox" onchange="updateProgress()" data-movie="3">
+                                <span>Watched</span>
+                            </label>
+                            <div class="rating-section">
+                                <span>Rate:</span>
+                                <div class="stars" data-movie="3">
+                                    <span class="star" onclick="setRating(3, 1)">★</span>
+                                    <span class="star" onclick="setRating(3, 2)">★</span>
+                                    <span class="star" onclick="setRating(3, 3)">★</span>
+                                    <span class="star" onclick="setRating(3, 4)">★</span>
+                                    <span class="star" onclick="setRating(3, 5)">★</span>
+                                </div>
+                            </div>
+                            <button class="spell-btn" onclick="castSpell(event, 'Expecto Patronum')">🦌 Expecto Patronum</button>
                         </div>
                         <div class="plot-summary">
                             <h4>Secrets of the Past</h4>
@@ -719,14 +720,29 @@
 
                     <!-- Movie 4 -->
                     <div class="movie-card">
-                        <div class="spell-effect"></div>
                         <div class="movie-header">
                             <div class="movie-number">4</div>
                             <div class="movie-info">
-                                <h3>Harry Potter and the Goblet of Fire</h3>
+                                <h3 class="movie-title">Harry Potter and the Goblet of Fire</h3>
                                 <div class="movie-details">2005 • Directed by Mike Newell • 157 minutes</div>
                             </div>
-                            <div style="margin-left: auto; font-size: 2rem; animation: float 2.5s ease-in-out infinite;">🔥</div>
+                        </div>
+                        <div class="movie-controls">
+                            <label class="watched-checkbox">
+                                <input type="checkbox" onchange="updateProgress()" data-movie="4">
+                                <span>Watched</span>
+                            </label>
+                            <div class="rating-section">
+                                <span>Rate:</span>
+                                <div class="stars" data-movie="4">
+                                    <span class="star" onclick="setRating(4, 1)">★</span>
+                                    <span class="star" onclick="setRating(4, 2)">★</span>
+                                    <span class="star" onclick="setRating(4, 3)">★</span>
+                                    <span class="star" onclick="setRating(4, 4)">★</span>
+                                    <span class="star" onclick="setRating(4, 5)">★</span>
+                                </div>
+                            </div>
+                            <button class="spell-btn" onclick="castSpell(event, 'Accio')">🪄 Accio</button>
                         </div>
                         <div class="plot-summary">
                             <h4>The Dark Lord Returns</h4>
@@ -753,9 +769,26 @@
                         <div class="movie-header">
                             <div class="movie-number">5</div>
                             <div class="movie-info">
-                                <h3>Harry Potter and the Order of the Phoenix</h3>
-                                <div class="movie-details">2007 • Directed by David Yates • 138 minutes</div>
+                                <h3 class="movie-title">Harry Potter and the Order of the Phoenix</h3>
+                                <div class="movie-details">2007 • David Yates • 138 minutes</div>
                             </div>
+                        </div>
+                        <div class="movie-controls">
+                            <label class="watched-checkbox">
+                                <input type="checkbox" onchange="updateProgress()" data-movie="5">
+                                <span>Watched</span>
+                            </label>
+                            <div class="rating-section">
+                                <span>Rate:</span>
+                                <div class="stars" data-movie="5">
+                                    <span class="star" onclick="setRating(5, 1)">★</span>
+                                    <span class="star" onclick="setRating(5, 2)">★</span>
+                                    <span class="star" onclick="setRating(5, 3)">★</span>
+                                    <span class="star" onclick="setRating(5, 4)">★</span>
+                                    <span class="star" onclick="setRating(5, 5)">★</span>
+                                </div>
+                            </div>
+                            <button class="spell-btn" onclick="castSpell(event, 'Stupefy')">💥 Stupefy</button>
                         </div>
                         <div class="plot-summary">
                             <h4>The Ministry Denies the Truth</h4>
@@ -782,9 +815,26 @@
                         <div class="movie-header">
                             <div class="movie-number">6</div>
                             <div class="movie-info">
-                                <h3>Harry Potter and the Half-Blood Prince</h3>
-                                <div class="movie-details">2009 • Directed by David Yates • 153 minutes</div>
+                                <h3 class="movie-title">Harry Potter and the Half-Blood Prince</h3>
+                                <div class="movie-details">2009 • David Yates • 153 minutes</div>
                             </div>
+                        </div>
+                        <div class="movie-controls">
+                            <label class="watched-checkbox">
+                                <input type="checkbox" onchange="updateProgress()" data-movie="6">
+                                <span>Watched</span>
+                            </label>
+                            <div class="rating-section">
+                                <span>Rate:</span>
+                                <div class="stars" data-movie="6">
+                                    <span class="star" onclick="setRating(6, 1)">★</span>
+                                    <span class="star" onclick="setRating(6, 2)">★</span>
+                                    <span class="star" onclick="setRating(6, 3)">★</span>
+                                    <span class="star" onclick="setRating(6, 4)">★</span>
+                                    <span class="star" onclick="setRating(6, 5)">★</span>
+                                </div>
+                            </div>
+                            <button class="spell-btn" onclick="castSpell(event, 'Sectumsempra')">⚔️ Sectumsempra</button>
                         </div>
                         <div class="plot-summary">
                             <h4>Uncovering Voldemort's Secrets</h4>
@@ -811,9 +861,26 @@
                         <div class="movie-header">
                             <div class="movie-number">7</div>
                             <div class="movie-info">
-                                <h3>Harry Potter and the Deathly Hallows – Part 1</h3>
-                                <div class="movie-details">2010 • Directed by David Yates • 146 minutes</div>
+                                <h3 class="movie-title">Harry Potter and the Deathly Hallows – Part 1</h3>
+                                <div class="movie-details">2010 • David Yates • 146 minutes</div>
                             </div>
+                        </div>
+                        <div class="movie-controls">
+                            <label class="watched-checkbox">
+                                <input type="checkbox" onchange="updateProgress()" data-movie="7">
+                                <span>Watched</span>
+                            </label>
+                            <div class="rating-section">
+                                <span>Rate:</span>
+                                <div class="stars" data-movie="7">
+                                    <span class="star" onclick="setRating(7, 1)">★</span>
+                                    <span class="star" onclick="setRating(7, 2)">★</span>
+                                    <span class="star" onclick="setRating(7, 3)">★</span>
+                                    <span class="star" onclick="setRating(7, 4)">★</span>
+                                    <span class="star" onclick="setRating(7, 5)">★</span>
+                                </div>
+                            </div>
+                            <button class="spell-btn" onclick="castSpell(event, 'Protego')">🛡️ Protego</button>
                         </div>
                         <div class="plot-summary">
                             <h4>The Hunt for Horcruxes</h4>
@@ -840,9 +907,26 @@
                         <div class="movie-header">
                             <div class="movie-number">8</div>
                             <div class="movie-info">
-                                <h3>Harry Potter and the Deathly Hallows – Part 2</h3>
-                                <div class="movie-details">2011 • Directed by David Yates • 130 minutes</div>
+                                <h3 class="movie-title">Harry Potter and the Deathly Hallows – Part 2</h3>
+                                <div class="movie-details">2011 • David Yates • 130 minutes</div>
                             </div>
+                        </div>
+                        <div class="movie-controls">
+                            <label class="watched-checkbox">
+                                <input type="checkbox" onchange="updateProgress()" data-movie="8">
+                                <span>Watched</span>
+                            </label>
+                            <div class="rating-section">
+                                <span>Rate:</span>
+                                <div class="stars" data-movie="8">
+                                    <span class="star" onclick="setRating(8, 1)">★</span>
+                                    <span class="star" onclick="setRating(8, 2)">★</span>
+                                    <span class="star" onclick="setRating(8, 3)">★</span>
+                                    <span class="star" onclick="setRating(8, 4)">★</span>
+                                    <span class="star" onclick="setRating(8, 5)">★</span>
+                                </div>
+                            </div>
+                            <button class="spell-btn" onclick="castSpell(event, 'Avada Kedavra')">💀 Avada Kedavra</button>
                         </div>
                         <div class="plot-summary">
                             <h4>The Final Battle</h4>
@@ -866,70 +950,437 @@
                 </div>
             </div>
         </section>
-
-        <section class="guide">
-            <div class="container">
-                <div class="viewing-guide">
-                    <h2 class="section-title">Ready to Begin Your Journey?</h2>
-                    <p style="font-size: 1.1rem; margin-bottom: 1rem;">
-                        The Harry Potter films are best experienced in order, as each movie builds upon the previous ones. 
-                        The story grows darker and more complex as the characters mature, making it perfect for viewers of all ages.
-                    </p>
-                    <p style="font-size: 1rem; color: #d0d0d0;">
-                        <strong>Total Runtime:</strong> Approximately 20 hours<br>
-                        <strong>Recommended Age:</strong> 8+ (later films are more intense)<br>
-                        <strong>Available on:</strong> Most major streaming platforms and digital rental services
-                    </p>
-                    <button class="cta-button" onclick="alert('Start with Harry Potter and the Philosopher\'s Stone and let the magic begin!')">
-                        Start Your Magical Journey
-                    </button>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p class="footer-text">
-                Experience the magic that captivated millions worldwide. The wizarding world awaits you.
-            </p>
+    <!-- Sorting Quiz Modal -->
+    <div id="sortingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSortingQuiz()">&times;</span>
+            <h2 style="text-align: center; color: #ffd700; margin-bottom: 2rem;">🏰 Hogwarts House Sorting</h2>
+            <div id="sortingQuestion">
+                <p id="questionText" style="font-size: 1.1rem; margin-bottom: 2rem; text-align: center;">Welcome to the Sorting Hat ceremony! Answer these questions honestly to discover your true Hogwarts house.</p>
+                <div id="questionOptions" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <button class="nav-btn" onclick="startSorting()" style="width: 100%;">Begin Sorting</button>
+                </div>
+            </div>
         </div>
-    </footer>
+    </div>
+
+    <!-- Character Quiz Modal -->
+    <div id="characterModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCharacterQuiz()">&times;</span>
+            <h2 style="text-align: center; color: #ffd700; margin-bottom: 2rem;">👤 Which Character Are You?</h2>
+            <div id="characterQuestion">
+                <p id="charQuestionText" style="font-size: 1.1rem; margin-bottom: 2rem; text-align: center;">Discover which Harry Potter character you're most like!</p>
+                <div id="charQuestionOptions" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <button class="nav-btn" onclick="startCharacterQuiz()" style="width: 100%;">Start Character Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Add some interactive magic
-        document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scroll for any internal links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+        // Movie quotes database
+        const quotes = [
+            {
+                text: "It is our choices that show what we truly are, far more than our abilities.",
+                author: "Albus Dumbledore"
+            },
+            {
+                text: "Happiness can be found even in the darkest of times, if one only remembers to turn on the light.",
+                author: "Albus Dumbledore"
+            },
+            {
+                text: "After all this time? Always.",
+                author: "Severus Snape"
+            },
+            {
+                text: "I solemnly swear that I am up to no good.",
+                author: "Harry Potter"
+            },
+            {
+                text: "It does not do to dwell on dreams and forget to live.",
+                author: "Albus Dumbledore"
+            },
+            {
+                text: "We've all got both light and dark inside us. What matters is the part we choose to act on.",
+                author: "Sirius Black"
+            },
+            {
+                text: "Don't let the Muggles get you down.",
+                author: "Ron Weasley"
+            },
+            {
+                text: "Books! And cleverness! There are more important things — friendship and bravery.",
+                author: "Hermione Granger"
+            }
+        ];
+
+        // Sorting Hat questions
+        const sortingQuestions = [
+            {
+                question: "What quality do you value most?",
+                answers: [
+                    { text: "Courage", house: "gryffindor" },
+                    { text: "Wisdom", house: "ravenclaw" },
+                    { text: "Loyalty", house: "hufflepuff" },
+                    { text: "Ambition", house: "slytherin" }
+                ]
+            },
+            {
+                question: "What's your greatest fear?",
+                answers: [
+                    { text: "Being ordinary", house: "gryffindor" },
+                    { text: "Being ignorant", house: "ravenclaw" },
+                    { text: "Being alone", house: "hufflepuff" },
+                    { text: "Being powerless", house: "slytherin" }
+                ]
+            },
+            {
+                question: "What magical creature appeals to you most?",
+                answers: [
+                    { text: "Phoenix", house: "gryffindor" },
+                    { text: "Dragon", house: "ravenclaw" },
+                    { text: "Unicorn", house: "hufflepuff" },
+                    { text: "Basilisk", house: "slytherin" }
+                ]
+            },
+            {
+                question: "What would you do with a Time-Turner?",
+                answers: [
+                    { text: "Save someone in danger", house: "gryffindor" },
+                    { text: "Learn from great minds of the past", house: "ravenclaw" },
+                    { text: "Spend more time with loved ones", house: "hufflepuff" },
+                    { text: "Gain knowledge to get ahead", house: "slytherin" }
+                ]
+            }
+        ];
+
+        // Character quiz questions
+        const characterQuestions = [
+            {
+                question: "How do you approach problems?",
+                answers: [
+                    { text: "Jump in headfirst", character: "Harry Potter" },
+                    { text: "Research thoroughly first", character: "Hermione Granger" },
+                    { text: "Ask friends for help", character: "Ron Weasley" },
+                    { text: "Find a clever workaround", character: "Luna Lovegood" }
+                ]
+            },
+            {
+                question: "What's your ideal weekend?",
+                answers: [
+                    { text: "Adventure and excitement", character: "Harry Potter" },
+                    { text: "Reading and learning", character: "Hermione Granger" },
+                    { text: "Hanging out with friends", character: "Ron Weasley" },
+                    { text: "Exploring strange places", character: "Luna Lovegood" }
+                ]
+            },
+            {
+                question: "What motivates you most?",
+                answers: [
+                    { text: "Protecting others", character: "Harry Potter" },
+                    { text: "Making a difference", character: "Hermione Granger" },
+                    { text: "Loyalty to family", character: "Ron Weasley" },
+                    { text: "Following your own path", character: "Luna Lovegood" }
+                ]
+            }
+        ];
+
+        let currentSortingQuestion = 0;
+        let houseScores = { gryffindor: 0, ravenclaw: 0, hufflepuff: 0, slytherin: 0 };
+        let currentCharacterQuestion = 0;
+        let characterScores = { "Harry Potter": 0, "Hermione Granger": 0, "Ron Weasley": 0, "Luna Lovegood": 0 };
+
+        // Progress tracking
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][data-movie]');
+            const watched = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const total = checkboxes.length;
+            const percentage = Math.round((watched / total) * 100);
+            
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `${watched} of ${total} movies watched (${percentage}%)`;
+            
+            // Save to localStorage
+            const watchedMovies = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.getAttribute('data-movie'));
+            localStorage.setItem('watchedMovies', JSON.stringify(watchedMovies));
+        }
+
+        // Load saved progress
+        function loadProgress() {
+            const saved = localStorage.getItem('watchedMovies');
+            if (saved) {
+                const watchedMovies = JSON.parse(saved);
+                watchedMovies.forEach(movieId => {
+                    const checkbox = document.querySelector(`input[data-movie="${movieId}"]`);
+                    if (checkbox) checkbox.checked = true;
                 });
+                updateProgress();
+            }
+        }
+
+        // Rating system
+        function setRating(movie, rating) {
+            const stars = document.querySelectorAll(`.stars[data-movie="${movie}"] .star`);
+            stars.forEach((star, index) => {
+                star.classList.toggle('filled', index < rating);
             });
+            
+            // Save rating
+            let ratings = JSON.parse(localStorage.getItem('movieRatings') || '{}');
+            ratings[movie] = rating;
+            localStorage.setItem('movieRatings', JSON.stringify(ratings));
+        }
 
-            // Add scroll animation for movie cards
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+        // Load saved ratings
+        function loadRatings() {
+            const ratings = JSON.parse(localStorage.getItem('movieRatings') || '{}');
+            Object.entries(ratings).forEach(([movie, rating]) => {
+                setRating(parseInt(movie), rating);
+            });
+        }
+
+        // Quote generator
+        function generateQuote() {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('movieQuote').textContent = `"${randomQuote.text}"`;
+            document.getElementById('quoteAuthor').textContent = `- ${randomQuote.author}`;
+        }
+
+        // Spell casting effects
+        function castSpell(event, spellName) {
+            const spell = document.createElement('div');
+            spell.className = 'spell-effect';
+            spell.textContent = getSpellEmoji(spellName);
+            spell.style.left = event.clientX + 'px';
+            spell.style.top = event.clientY + 'px';
+            document.body.appendChild(spell);
+            
+            setTimeout(() => {
+                document.body.removeChild(spell);
+            }, 2000);
+        }
+
+        function castRandomSpell(event) {
+            const spells = ['Lumos', 'Expelliarmus', 'Expecto Patronum', 'Accio', 'Stupefy', 'Protego'];
+            const randomSpell = spells[Math.floor(Math.random() * spells.length)];
+            castSpell(event, randomSpell);
+        }
+
+        function getSpellEmoji(spellName) {
+            const spellEmojis = {
+                'Lumos': '💡✨',
+                'Expelliarmus': '⚡💫',
+                'Expecto Patronum': '🦌✨',
+                'Accio': '🪄💨',
+                'Stupefy': '💥⚡',
+                'Protego': '🛡️✨',
+                'Sectumsempra': '⚔️💫',
+                'Avada Kedavra': '💀⚡'
             };
+            return spellEmojis[spellName] || '✨';
+        }
 
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
+        // Toggle progress section
+        function toggleProgress() {
+            const section = document.getElementById('progressSection');
+            section.style.display = section.style.display === 'none' ? 'block' : 'none';
+        }
 
-            // Initially hide movie cards and animate them in
-            document.querySelectorAll('.movie-card').forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-                observer.observe(card);
+        // Sorting Hat Quiz
+        function openSortingQuiz() {
+            document.getElementById('sortingModal').style.display = 'block';
+        }
+
+        function closeSortingQuiz() {
+            document.getElementById('sortingModal').style.display = 'none';
+            currentSortingQuestion = 0;
+            houseScores = { gryffindor: 0, ravenclaw: 0, hufflepuff: 0, slytherin: 0 };
+        }
+
+        function startSorting() {
+            currentSortingQuestion = 0;
+            houseScores = { gryffindor: 0, ravenclaw: 0, hufflepuff: 0, slytherin: 0 };
+            showSortingQuestion();
+        }
+
+        function showSortingQuestion() {
+            if (currentSortingQuestion >= sortingQuestions.length) {
+                showSortingResult();
+                return;
+            }
+
+            const question = sortingQuestions[currentSortingQuestion];
+            document.getElementById('questionText').textContent = question.question;
+            
+            const options = document.getElementById('questionOptions');
+            options.innerHTML = '';
+            
+            question.answers.forEach((answer, index) => {
+                const button = document.createElement('button');
+                button.className = 'nav-btn';
+                button.textContent = answer.text;
+                button.style.width = '100%';
+                button.onclick = () => selectSortingAnswer(answer.house);
+                options.appendChild(button);
+            });
+        }
+
+        function selectSortingAnswer(house) {
+            houseScores[house]++;
+            currentSortingQuestion++;
+            showSortingQuestion();
+        }
+
+        function showSortingResult() {
+            const winningHouse = Object.keys(houseScores).reduce((a, b) => houseScores[a] > houseScores[b] ? a : b);
+            
+            const houseInfo = {
+                gryffindor: { name: 'Gryffindor', emoji: '🦁', color: '#740001' },
+                ravenclaw: { name: 'Ravenclaw', emoji: '🦅', color: '#0e1a40' },
+                hufflepuff: { name: 'Hufflepuff', emoji: '🦡', color: '#ffed4a' },
+                slytherin: { name: 'Slytherin', emoji: '🐍', color: '#1a472a' }
+            };
+            
+            const house = houseInfo[winningHouse];
+            
+            document.getElementById('questionText').innerHTML = `
+                <div style="text-align: center; font-size: 2rem; margin-bottom: 1rem;">${house.emoji}</div>
+                <h3 style="color: ${house.color}; margin-bottom: 1rem;">Welcome to ${house.name}!</h3>
+                <p>The Sorting Hat has spoken! You belong in ${house.name} house.</p>
+            `;
+            
+            document.getElementById('questionOptions').innerHTML = `
+                <button class="nav-btn" onclick="closeSortingQuiz()" style="width: 100%;">Excellent!</button>
+            `;
+            
+            // Show house badge
+            const badge = document.getElementById('houseBadge');
+            const houseEmoji = document.getElementById('houseEmoji');
+            const houseName = document.getElementById('houseName');
+            
+            badge.className = `house-badge ${winningHouse}`;
+            houseEmoji.textContent = house.emoji;
+            houseName.textContent = house.name;
+            badge.style.display = 'block';
+            
+            // Save to localStorage
+            localStorage.setItem('hogwartsHouse', winningHouse);
+        }
+
+        // Character Quiz
+        function openCharacterQuiz() {
+            document.getElementById('characterModal').style.display = 'block';
+        }
+
+        function closeCharacterQuiz() {
+            document.getElementById('characterModal').style.display = 'none';
+            currentCharacterQuestion = 0;
+            characterScores = { "Harry Potter": 0, "Hermione Granger": 0, "Ron Weasley": 0, "Luna Lovegood": 0 };
+        }
+
+        function startCharacterQuiz() {
+            currentCharacterQuestion = 0;
+            characterScores = { "Harry Potter": 0, "Hermione Granger": 0, "Ron Weasley": 0, "Luna Lovegood": 0 };
+            showCharacterQuestion();
+        }
+
+        function showCharacterQuestion() {
+            if (currentCharacterQuestion >= characterQuestions.length) {
+                showCharacterResult();
+                return;
+            }
+
+            const question = characterQuestions[currentCharacterQuestion];
+            document.getElementById('charQuestionText').textContent = question.question;
+            
+            const options = document.getElementById('charQuestionOptions');
+            options.innerHTML = '';
+            
+            question.answers.forEach((answer, index) => {
+                const button = document.createElement('button');
+                button.className = 'nav-btn';
+                button.textContent = answer.text;
+                button.style.width = '100%';
+                button.onclick = () => selectCharacterAnswer(answer.character);
+                options.appendChild(button);
+            });
+        }
+
+        function selectCharacterAnswer(character) {
+            characterScores[character]++;
+            currentCharacterQuestion++;
+            showCharacterQuestion();
+        }
+
+        function showCharacterResult() {
+            const winningCharacter = Object.keys(characterScores).reduce((a, b) => characterScores[a] > characterScores[b] ? a : b);
+            
+            const characterInfo = {
+                "Harry Potter": { emoji: '⚡', desc: "You're brave, loyal, and willing to sacrifice for others!" },
+                "Hermione Granger": { emoji: '📚', desc: "You're intelligent, logical, and always prepared!" },
+                "Ron Weasley": { emoji: '♟️', desc: "You're loyal, funny, and a great friend!" },
+                "Luna Lovegood": { emoji: '🦋', desc: "You're unique, creative, and see the world differently!" }
+            };
+            
+            const character = characterInfo[winningCharacter];
+            
+            document.getElementById('charQuestionText').innerHTML = `
+                <div style="text-align: center; font-size: 3rem; margin-bottom: 1rem;">${character.emoji}</div>
+                <h3 style="color: #ffd700; margin-bottom: 1rem;">You are ${winningCharacter}!</h3>
+                <p>${character.desc}</p>
+            `;
+            
+            document.getElementById('charQuestionOptions').innerHTML = `
+                <button class="nav-btn" onclick="closeCharacterQuiz()" style="width: 100%;">Awesome!</button>
+            `;
+        }
+
+        // Load saved house badge
+        function loadHouseBadge() {
+            const savedHouse = localStorage.getItem('hogwartsHouse');
+            if (savedHouse) {
+                const houseInfo = {
+                    gryffindor: { name: 'Gryffindor', emoji: '🦁' },
+                    ravenclaw: { name: 'Ravenclaw', emoji: '🦅' },
+                    hufflepuff: { name: 'Hufflepuff', emoji: '🦡' },
+                    slytherin: { name: 'Slytherin', emoji: '🐍' }
+                };
+                
+                const house = houseInfo[savedHouse];
+                const badge = document.getElementById('houseBadge');
+                const houseEmoji = document.getElementById('houseEmoji');
+                const houseName = document.getElementById('houseName');
+                
+                badge.className = `house-badge ${savedHouse}`;
+                houseEmoji.textContent = house.emoji;
+                houseName.textContent = house.name;
+                badge.style.display = 'block';
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            loadRatings();
+            loadHouseBadge();
+            generateQuote();
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(event) {
+                const sortingModal = document.getElementById('sortingModal');
+                const characterModal = document.getElementById('characterModal');
+                
+                if (event.target === sortingModal) {
+                    closeSortingQuiz();
+                }
+                if (event.target === characterModal) {
+                    closeCharacterQuiz();
+                }
             });
         });
     </script>
